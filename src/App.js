@@ -1,45 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+// import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
 
   state = {
-    results: [
-      { name: 'Alicja', },
-      { name: 'Bogdan' }
-    ]
+    results: []
   }
 
   render() {
 
-    fetch('https://randomuser.me/api/?results=50')
+    fetch('https://randomuser.me/api/?results=10')
     .then(response => response.json())
     .then(data => {
       this.setState(data);
     })
 
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text style={styles.text}>Hello JFDZL2</Text>
-        {this.state.results.map(item => (
+        this.state.results.forEach(user => (
           <View>
-            <Text>{item.name.first}</Text>
+            <Text>{user.name.first}</Text>
+            <Text>{user.name.last}</Text>
+            <Text>{user.email}</Text>
           </View>
-        ))}
-      </View>
+        ))
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 22
-  }
-});
+
